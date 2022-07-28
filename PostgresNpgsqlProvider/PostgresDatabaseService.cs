@@ -3,23 +3,22 @@ using Microsoft.Extensions.Logging;
 using Npgsql;
 using NpgsqlTypes;
 using SupplyOrdersServiceCore.Domain.Enums;
+using SupplyOrdersServiceCore.Domain.Interfaces;
 using SupplyOrdersServiceCore.Domain.Models;
-using SupplyOrdersServiceCore.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace SupplyOrdersServiceCore.Services
+namespace PostgresNpgsqlProvider
 {
-    public class PostgresDatabaseService: IDatabaseService
+    public class PostgresDatabaseService : IDatabaseService
     {
         private readonly ILogger<PostgresDatabaseService> _logger;
         private readonly IConfiguration _configuration;
         private NpgsqlConnection _connection;
-        public PostgresDatabaseService(ILogger<PostgresDatabaseService>logger, IConfiguration configuration)
+        public PostgresDatabaseService(ILogger<PostgresDatabaseService> logger, IConfiguration configuration)
         {
             _logger = logger;
             _configuration = configuration;
@@ -33,12 +32,12 @@ namespace SupplyOrdersServiceCore.Services
                 string server = _configuration.GetSection("DatabaseConnection").GetValue<string>("Server");
                 int port = _configuration.GetSection("DatabaseConnection").GetValue<int>("Port");
                 string database = _configuration.GetSection("DatabaseConnection").GetValue<string>("Database");
-                string dbLogin = Program.DecryptString(_configuration.GetSection("DatabaseConnection").GetValue<string>("User"));
-                string dbPass = Program.DecryptString(_configuration.GetSection("DatabaseConnection").GetValue<string>("Pass"));
+                string dbLogin = DecryptString(_configuration.GetSection("DatabaseConnection").GetValue<string>("User"));
+                string dbPass = DecryptString(_configuration.GetSection("DatabaseConnection").GetValue<string>("Pass"));
                 string dbConnectionString = $"Server={server};Port={port};Database={database};User id={dbLogin};Password={dbPass}";
                 _connection = new NpgsqlConnection(dbConnectionString);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _logger.LogError($"Error during DB initialization: {ex.Message}");
             }
@@ -120,7 +119,7 @@ namespace SupplyOrdersServiceCore.Services
                     {
                         Product product = new Product();
                         product.Id = reader.GetInt64(0);
-                        product.Name = reader.GetString(1);
+                        product.ProductName = reader.GetString(1);
                         product.CentralIdentNumber = reader.GetString(2);
                         product.CompanyId = reader.IsDBNull(3) ? 0 : reader.GetInt32(3);
                         product.Quantity = reader.GetInt32(4);
@@ -181,7 +180,7 @@ namespace SupplyOrdersServiceCore.Services
                     {
                         Product product = new Product();
                         product.Id = reader.GetInt64(0);
-                        product.Name = reader.GetString(1);
+                        product.ProductName = reader.GetString(1);
                         product.CentralIdentNumber = reader.GetString(2);
                         product.CompanyId = reader.IsDBNull(3) ? 0 : reader.GetInt32(3);
                         product.Quantity = reader.GetInt32(4);
@@ -437,6 +436,17 @@ namespace SupplyOrdersServiceCore.Services
                 _logger.LogError($"Error during order status update in DB: {ex.Message}");
                 return false;
             }
+        }
+
+        public static string DecryptString(string encoded)
+        {
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i <= encoded.Length - 2; i += 2)
+            {
+                sb.Append(Convert.ToString(Convert.ToChar(Int32.Parse(encoded.Substring(i, 2),
+                System.Globalization.NumberStyles.HexNumber))));
+            }
+            return sb.ToString();
         }
     }
 }

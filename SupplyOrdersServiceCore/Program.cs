@@ -1,6 +1,8 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using PostgresNpgsqlProvider;
+using PostgresDapperProvider;
 using Serilog;
 using SupplyOrdersServiceCore.Interfaces;
 using SupplyOrdersServiceCore.Modules;
@@ -59,7 +61,8 @@ namespace SupplyOrdersServiceCore
                     services.AddSingleton<OrderChecker>();
                     services.AddSingleton<OrderConfirmationSender>();
                     services.AddSingleton<IOrderService, CsvOrderService>();
-                    services.AddSingleton<IDatabaseService, PostgresDatabaseService>();
+                    //services.AddNpgsqlDatabaseProvider();
+                    services.AddDapperDatabaseProvider();
                     services.AddSingleton<IStorageService, StorageService>();
                     services.AddSingleton<IFtpService, FluentFtpService>();
                     services.AddSingleton<IExportService, DbfExportService>();

@@ -17,7 +17,7 @@ namespace SupplyOrdersServiceCore.Domain.Models
 
         [Column("name")]
         [MaxLength(100)]
-        public string Name { get; set; }
+        public string ProductName { get; set; }
 
         [Column("central_ident_number")]
         [MaxLength(6)]

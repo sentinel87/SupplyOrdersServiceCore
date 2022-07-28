@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace SupplyOrdersServiceCore.Interfaces
+namespace SupplyOrdersServiceCore.Domain.Interfaces
 {
     public interface IDatabaseService
     {

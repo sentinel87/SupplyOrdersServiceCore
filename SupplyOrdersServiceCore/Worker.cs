@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using SupplyOrdersServiceCore.Interfaces;
 using SupplyOrdersServiceCore.Modules;
+using SupplyOrdersServiceCore.Domain.Interfaces;
 
 namespace SupplyOrdersServiceCore
 {

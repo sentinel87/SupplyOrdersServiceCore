@@ -56,7 +56,7 @@ namespace SupplyOrdersServiceCore_Tests
                     new Product()
                     {
                         Id = 1,
-                        Name = "Test product 1",
+                        ProductName = "Test product 1",
                         CentralIdentNumber = "11223344",
                         CompanyId = 14567,
                         Quantity = 43,
@@ -65,7 +65,7 @@ namespace SupplyOrdersServiceCore_Tests
                     new Product()
                     {
                         Id = 2,
-                        Name = "Test product 2",
+                        ProductName = "Test product 2",
                         CentralIdentNumber = "33117799",
                         CompanyId = 1432,
                         Quantity = 4,
@@ -97,7 +97,7 @@ namespace SupplyOrdersServiceCore_Tests
                     new Product()
                     {
                         Id = 1,
-                        Name = "Test product 1",
+                        ProductName = "Test product 1",
                         CentralIdentNumber = "11223344",
                         CompanyId = 14567,
                         Quantity = 43,
@@ -106,7 +106,7 @@ namespace SupplyOrdersServiceCore_Tests
                     new Product()
                     {
                         Id = 2,
-                        Name = "Test product 2",
+                        ProductName = "Test product 2",
                         CentralIdentNumber = "33117799",
                         CompanyId = 1432,
                         Quantity = 4,
@@ -138,7 +138,7 @@ namespace SupplyOrdersServiceCore_Tests
                     new Product()
                     {
                         Id = 1,
-                        Name = "Test product 1",
+                        ProductName = "Test product 1",
                         CentralIdentNumber = "11223344",
                         CompanyId = 14567,
                         Quantity = 43,
@@ -147,7 +147,7 @@ namespace SupplyOrdersServiceCore_Tests
                     new Product()
                     {
                         Id = 2,
-                        Name = "Test product 2",
+                        ProductName = "Test product 2",
                         CentralIdentNumber = "33117799",
                         CompanyId = 1432,
                         Quantity = 4,

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using SupplyOrdersServiceCore.Domain.Enums;
+using SupplyOrdersServiceCore.Domain.Interfaces;
 using SupplyOrdersServiceCore.Domain.Models;
 using SupplyOrdersServiceCore.Interfaces;
 using System;

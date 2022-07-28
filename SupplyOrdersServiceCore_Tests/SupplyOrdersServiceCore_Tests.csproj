@@ -31,6 +31,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\PostgresDapperProvider\PostgresDapperProvider.csproj" />
     <ProjectReference Include="..\SupplyOrdersServiceCore.Domain\SupplyOrdersServiceCore.Domain.csproj" />
     <ProjectReference Include="..\SupplyOrdersServiceCore\SupplyOrdersServiceCore.csproj" />
   </ItemGroup>

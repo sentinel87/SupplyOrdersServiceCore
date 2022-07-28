@@ -91,7 +91,7 @@ namespace SupplyOrdersServiceCore.Services
                         string comment = "";
                         if (product.CompanyId == 0)
                             comment = "Product not available in the company card index.";
-                        writer.AddRecord(product.Id, order.Id, product.Name, product.CentralIdentNumber, product.Quantity, shortage, comment);
+                        writer.AddRecord(product.Id, order.Id, product.ProductName, product.CentralIdentNumber, product.Quantity, shortage, comment);
                     }
                     writer.Write(fos);
                 }

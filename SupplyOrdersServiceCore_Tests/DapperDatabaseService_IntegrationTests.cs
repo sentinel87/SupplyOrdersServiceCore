@@ -2,10 +2,9 @@
 using Microsoft.Extensions.Logging;
 using Moq;
 using NUnit.Framework;
-using PostgresNpgsqlProvider;
+using PostgresDapperProvider;
 using SupplyOrdersServiceCore.Domain.Enums;
 using SupplyOrdersServiceCore.Domain.Models;
-using SupplyOrdersServiceCore.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,10 +15,10 @@ using System.Threading.Tasks;
 
 namespace SupplyOrdersServiceCore_Tests
 {
-    public class PostgresDatabaseService_IntegrationTests
+    public class DapperDatabaseService_IntegrationTests
     {
-        PostgresDatabaseService _postgresDatabaseService;
-        Mock<ILogger<PostgresDatabaseService>> _loggerMock;
+        DapperDatabaseService _postgresDatabaseService;
+        Mock<ILogger<DapperDatabaseService>> _loggerMock;
         CancellationToken _stoppingToken;
 
         [SetUp]
@@ -28,8 +27,8 @@ namespace SupplyOrdersServiceCore_Tests
             var builder = new ConfigurationBuilder();
             buildConfig(builder);
             var configRoot = builder.Build();
-            _loggerMock = new Mock<ILogger<PostgresDatabaseService>>();
-            _postgresDatabaseService = new PostgresDatabaseService(_loggerMock.Object, configRoot);
+            _loggerMock = new Mock<ILogger<DapperDatabaseService>>();
+            _postgresDatabaseService = new DapperDatabaseService(_loggerMock.Object, configRoot);
             _stoppingToken = new CancellationToken();
         }
 
@@ -47,7 +46,7 @@ namespace SupplyOrdersServiceCore_Tests
         {
             int status = -1;
             await _postgresDatabaseService.OpenConnection(_stoppingToken);
-            status = await _postgresDatabaseService.CheckOrderStatus(0,_stoppingToken);
+            status = await _postgresDatabaseService.CheckOrderStatus(1, _stoppingToken);
             await _postgresDatabaseService.CloseConnection();
 
             Assert.IsTrue(status != -2);
@@ -80,7 +79,7 @@ namespace SupplyOrdersServiceCore_Tests
         {
             List<Product> products = null;
             await _postgresDatabaseService.OpenConnection(_stoppingToken);
-            products = await _postgresDatabaseService.GetConfirmedOrderPositions(0, _stoppingToken);
+            products = await _postgresDatabaseService.GetConfirmedOrderPositions(1, _stoppingToken);
             await _postgresDatabaseService.CloseConnection();
 
             Assert.IsTrue(products != null);

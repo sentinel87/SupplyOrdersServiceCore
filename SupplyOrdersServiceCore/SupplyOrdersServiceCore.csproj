@@ -20,6 +20,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\PostgresDapperProvider\PostgresDapperProvider.csproj" />
+    <ProjectReference Include="..\PostgresNpgsqlProvider\PostgresNpgsqlProvider.csproj" />
     <ProjectReference Include="..\SupplyOrdersServiceCore.Domain\SupplyOrdersServiceCore.Domain.csproj" />
   </ItemGroup>
 </Project>
